@@ -1,6 +1,8 @@
 import './globals.css';
+import dynamic from 'next/dynamic';
+
 import Script from 'next/script';
-import Navbar from '../components/Navbar';
+const Navbar = dynamic(() => import('../components/Navbar'), { ssr: false });
 import Footer from '../components/Footer';
 
 export const metadata = {
@@ -22,25 +24,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <head>
-        {/* Font Awesome CSS for icons used throughout the site */}
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        />
-      </head>
       <body>
         <Navbar />
         <main>{children}</main>
         <Footer />
-        {/* Bootstrap JS bundle for interactive components such as modals and carousels */}
-        <Script
-          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
       </body>
     </html>
   );
